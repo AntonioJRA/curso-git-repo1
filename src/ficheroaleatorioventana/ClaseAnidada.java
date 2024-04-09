@@ -7,7 +7,7 @@ package ficheroaleatorioventana;
 
 /**
  *
- * @author usuario
+ * @author Usuario
  */
 public class ClaseAnidada {
     

@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author usuario
+ * @author Usuario
  */
 public class SuperclaseDepart extends JFrame {
 
@@ -22,67 +22,6 @@ public class SuperclaseDepart extends JFrame {
     
     public SuperclaseDepart() {
     }
-
-    void visualiza(int dep) {
-        String nom = "";
-        String loca = "";
-        long pos;
-        int depa;
-        File fichero = new File("AleatorioDep.dat");
-        try {
-            RandomAccessFile file = new RandomAccessFile(fichero, "r");
-            // Calculo del reg a leer
-            pos = 44 * (dep - 1);
-            file.seek(pos);
-            depa = file.readInt();
-            System.out.println("Departamento leído:" + depa);
-            char[] nom1 = new char[10];
-            char aux;
-            char[] loc1 = new char[10];
-            for (int i = 0; i < 10; i++) {
-                aux = file.readChar();
-                nom1[i] = aux;
-            }
-            for (int i = 0; i < 10; i++) {
-                aux = file.readChar();
-                loc1[i] = aux;
-            }
-            nom = new String(nom1);
-            loca = new String(loc1);
-            System.out.println("DEP: " + dep + ", Nombre: " + nom + ", Localidad: " + loca);
-            nombre.setText(nom);
-            loc.setText(loca);
-            file.close();
-        } catch (IOException e1) {
-            System.out.println("ERROR AL LEER AleatorioDep.dat");
-            e1.printStackTrace();
-        }
-    } // fin visualiza
-
-    void grabar(int dep, String nom, String loc) {
-        long pos;
-        StringBuffer buffer = null;
-        File fichero = new File("AleatorioDep.dat");
-        try {
-            RandomAccessFile file = new RandomAccessFile(fichero, "rw");
-            // Calculo del reg a leer
-            pos = 44 * (dep - 1);
-            //if (file.length()==0) return false; // si está vacío
-            file.seek(pos);
-            file.writeInt(dep);
-            buffer = new StringBuffer(nom);
-            buffer.setLength(10);
-            file.writeChars(buffer.toString()); //insertar nombre
-            buffer = new StringBuffer(loc);
-            buffer.setLength(10);
-            file.writeChars(buffer.toString()); //insertar loc
-            file.close();
-            System.out.println(" GRABADO el " + dep);
-        } catch (IOException e1) {
-            System.out.println("ERROR AL grabarr AleatorioDep.dat");
-            e1.printStackTrace();
-        }
-    } // fin grabar
 
     public void verporconsola() throws IOException {
         String nom = "";
@@ -124,10 +63,70 @@ public class SuperclaseDepart extends JFrame {
         {
             System.out.println(" --------- FICHERO VACIO ---------");
         }
-        ClaseAnidada ej = new ClaseAnidada(   (VentanaDepart)  this);
+        ClaseAnidada ej = new ClaseAnidada((VentanaDepart)this);
         ej.entrada();
         System.out.println("Llamo a salida: " + ej.salida(10));
-    } // fin verporconsola
-    // fin verporconsola
+    } // botonFinalizar verporconsola
+
+    void visualiza(int dep) {
+        String nom = "";
+        String loca = "";
+        long pos;
+        int depa;
+        File fichero = new File("AleatorioDep.dat");
+        try {
+            RandomAccessFile file = new RandomAccessFile(fichero, "r");
+            // Calculo del reg a leer
+            pos = 44 * (dep - 1);
+            file.seek(pos);
+            depa = file.readInt();
+            System.out.println("Departamento leído:" + depa);
+            char[] nom1 = new char[10];
+            char aux;
+            char[] loc1 = new char[10];
+            for (int i = 0; i < 10; i++) {
+                aux = file.readChar();
+                nom1[i] = aux;
+            }
+            for (int i = 0; i < 10; i++) {
+                aux = file.readChar();
+                loc1[i] = aux;
+            }
+            nom = new String(nom1);
+            loca = new String(loc1);
+            System.out.println("DEP: " + dep + ", Nombre: " + nom + ", Localidad: " + loca);
+            nombre.setText(nom);
+            loc.setText(loca);
+            file.close();
+        } catch (IOException e1) {
+            System.out.println("ERROR AL LEER AleatorioDep.dat");
+            e1.printStackTrace();
+        }
+    } // botonFinalizar visualiza
+
+    void grabar(int dep, String nom, String loc) {
+        long pos;
+        StringBuffer buffer = null;
+        File fichero = new File("AleatorioDep.dat");
+        try {
+            RandomAccessFile file = new RandomAccessFile(fichero, "rw");
+            // Calculo del reg a leer
+            pos = 44 * (dep - 1);
+            //if (file.length()==0) return false; // si está vacío
+            file.seek(pos);
+            file.writeInt(dep);
+            buffer = new StringBuffer(nom);
+            buffer.setLength(10);
+            file.writeChars(buffer.toString()); //insertar nombre
+            buffer = new StringBuffer(loc);
+            buffer.setLength(10);
+            file.writeChars(buffer.toString()); //insertar loc
+            file.close();
+            System.out.println(" GRABADO el " + dep);
+        } catch (IOException e1) {
+            System.out.println("ERROR AL grabarr AleatorioDep.dat");
+            e1.printStackTrace();
+        }
+    } // botonFinalizar grabar
     
 }

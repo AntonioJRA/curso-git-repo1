@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import javax.swing.*;
 
-public class VentanaDepart extends SuperclaseDepart implements ActionListener, InterfaceVentanaDepart {
+public class VentanaDepart extends SuperclaseDepart implements ActionListener, InterfaceVentanaDept {
 
     private static final long serialVersionUID = 1L;
     JTextField num = new JTextField(10);
@@ -20,12 +20,12 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
     JLabel lloc = new JLabel("LOCALIDAD:");
 
     JButton botonAltaDepartamento = new JButton("Insertar Depar.t");
-    JButton botonConsultaDepartamento = new JButton("Consultar Depart.");
-    JButton botonBorraDepartamento = new JButton("Borrar Depart.");
+    JButton botonConsultarDepartamento = new JButton("Consultar Depart.");
+    JButton botonBorrarDepartamento = new JButton("Borrar Depart.");
     JButton botonLimpiarDatos = new JButton("Limpiar datos.");
     JButton botonModificarDepartamento = new JButton("Modificar Departamento.");
-    JButton ver = new JButton("Ver por consola.");
-    JButton fin = new JButton("CERRAR");
+    JButton BotonVerPorConsola = new JButton("Ver por consola.");
+    JButton botonFinalizar = new JButton("CERRAR");
     Color c; //para poner colores
     // WHITE,LIGHTGRAY,GRAY,DARKGRAY,BLUE,BLACK,RED,MAGENTA,PINK,ORANGE,CYAN,GREEN,YELLOW
 
@@ -41,7 +41,7 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
         p1.setLayout(new FlowLayout());
         p1.add(lnum);
         p1.add(num);
-        p1.add(botonConsultaDepartamento);
+        p1.add(botonConsultarDepartamento);
 
         JPanel p2 = new JPanel();
         p2.setLayout(new FlowLayout());
@@ -57,7 +57,7 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
         p4.setLayout(new FlowLayout());
         c = Color.YELLOW;
         p4.add(botonAltaDepartamento);
-        p4.add(botonBorraDepartamento);
+        p4.add(botonBorrarDepartamento);
         p4.add(botonModificarDepartamento);
         p4.setBackground(c);
 
@@ -65,15 +65,15 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
         p4.setLayout(new FlowLayout());
         c = Color.PINK;
         p5.add(botonLimpiarDatos);
-        p5.add(ver);
-        p5.add(fin);
+        p5.add(BotonVerPorConsola);
+        p5.add(botonFinalizar);
         p5.setBackground(c);
 
         JPanel p7 = new JPanel();
         p7.setLayout(new FlowLayout());
         p7.add(mensaje);
 
-        // para ver la ventana y colocar los controles verticalmente
+        // para BotonVerPorConsola la ventana y colocar los controles verticalmente
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
         // añadir los panel al frame
         add(p0);
@@ -89,37 +89,36 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
 
         botonAltaDepartamento.addActionListener(this);
         botonLimpiarDatos.addActionListener(this);
-        fin.addActionListener(this);
-        botonConsultaDepartamento.addActionListener(this);
-        botonBorraDepartamento.addActionListener(this);
+        botonFinalizar.addActionListener(this);
+        botonConsultarDepartamento.addActionListener(this);
+        botonBorrarDepartamento.addActionListener(this);
         botonModificarDepartamento.addActionListener(this);
-        ver.addActionListener(this);
+        BotonVerPorConsola.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
         int dep, confirm;
         final String existeDepartamento = "DEPARTAMENTO EXISTE.";
-
         if (e.getSource() == botonAltaDepartamento) {
             altaDepartamento(existeDepartamento);
         }
 
-        if (e.getSource() == botonConsultaDepartamento) {
+        if (e.getSource() == botonConsultarDepartamento) {
             consultaDepartamento(existeDepartamento, "PRUEBA");
+
         }
 
-        if (e.getSource() == botonBorraDepartamento) {
+        if (e.getSource() == botonBorrarDepartamento) {
             borraDepartamento(existeDepartamento);
         }
         if (e.getSource() == botonModificarDepartamento) {
             modificaDepartamento(existeDepartamento);
         }
-
-        if (e.getSource() == fin) { //SE PULSA EL BOTON salir 	
+        if (e.getSource() == botonFinalizar) { //SE PULSA EL BOTON salir 	
             System.exit(0);
             //dispose();   	
         }
-        if (e.getSource() == ver) { //SE PULSA EL BOTON  ver por consola  	
+        if (e.getSource() == BotonVerPorConsola) { //SE PULSA EL BOTON  BotonVerPorConsola por consola  	
             try {
                 mensaje.setText("Visualizando el fichero por la consolaa.....");
                 verporconsola();
@@ -156,7 +155,7 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
                         mensaje.setText(" REGISTRO MODIFICADO: " + dep);
                     }
                 } else {
-                    mensaje.setText(NO_EXISTE_DEPARTAMENTO);
+                    mensaje.setText(NOEXISTEDEPARTAMENTO);
                     nombre.setText(" ");
                     loc.setText(" ");
                 }
@@ -195,7 +194,7 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
                         loc.setText(" ");
                     }
                 } else {
-                    mensaje.setText(NO_EXISTE_DEPARTAMENTO);
+                    mensaje.setText(NOEXISTEDEPARTAMENTO);
                     nombre.setText(" ");
                     loc.setText(" ");
                 }
@@ -212,7 +211,7 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
     }
 
     @Override
-    public int consultaDepartamento(final String existeDepartamento, String parametro2) {
+    public int consultaDepartamento(final String existeDepartamento, String param2) {
         int dep;
         //SE PULSA EL BOTON  consultar
         mensaje.setText(" has pulsado el boton alta");
@@ -223,7 +222,7 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
                     mensaje.setText(existeDepartamento);
                     visualiza(dep);
                 } else {
-                    mensaje.setText(NO_EXISTE_DEPARTAMENTO);
+                    mensaje.setText(NOEXISTEDEPARTAMENTO);
                     nombre.setText(" ");
                     loc.setText(" ");
                 }
@@ -267,8 +266,10 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
             // lo creo
         }
     }
-    private static final String NO_EXISTE_DEPARTAMENTO = "DEPARTAMENTO NO EXISTE.";
+    private static final String NOEXISTEDEPARTAMENTO = "DEPARTAMENTO NO EXISTE.";
+    // botonFinalizar verporconsola
 
+// botonFinalizar verporconsola
 
     boolean consultar(int dep) throws IOException {
         long pos;
@@ -295,8 +296,8 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
             return false;
         }
     }
-    // fin visualiza
-    // fin consultar
+    // botonFinalizar visualiza
+    // botonFinalizar consultar
 
     void borrar(int dep) {	    // con borrar ponemos a 0 el dep que se quiere borrar
         // y a blancos el nombre y la localidad
@@ -325,8 +326,8 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
             System.out.println("ERROR AL BORRAR AleatorioDep.dat");
             e1.printStackTrace();
         }
-    } // fin borrar
-// fin borrar
+    } // botonFinalizar borrar
+// botonFinalizar borrar
 
     void modificar(int dep) {	    // con modificar asignamos los datos tecleados
         String nom = "", loca = "";
@@ -355,7 +356,6 @@ public class VentanaDepart extends SuperclaseDepart implements ActionListener, I
             e1.printStackTrace();
         }
     }
-    // fin grabar
-    // fin modificar
-
+    // botonFinalizar grabar
+    // botonFinalizar modificar
 }//fin clase
